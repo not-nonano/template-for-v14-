@@ -1,6 +1,6 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { token } = require('./config.json');
+require('dotenv').config()
 const fs = require('fs');
 
 const commands = [];
@@ -19,7 +19,7 @@ const clientId = '966175730096570419';
 const guildId = '575341681596039178';
 
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
 
 (async () => {
     try {
