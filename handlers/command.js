@@ -1,21 +1,15 @@
-const { Interaction } = require('discord.js')
-module.exports = {
-    name: 'interactionCreate',
-    /**
-     * 
-     * @param {Interaction} interaction 
-     * @returns 
-     */
-    async execute(interaction) {
-        if (!interaction.isCommand()) return;
-        const command = interaction.client.commands.get(interaction.commandName);
-        if (!command) return;
-
-        try {
-            await command.execute(interaction);
-        } catch (error) {
-            console.error(error);
-            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-        }
+const { readdirSync } = require("fs");
+module.exports = (client) => {
+    try {
+        readdirSync("./commands/").forEach((dir) => {
+            const commands = readdirSync(`./commands/${dir}/`).filter((file) => file.endsWith(".js"));
+            for (let file of commands) {
+                let pull = require(`../commands/${dir}/${file}`);
+                 
+                client.commands.set(pull.name, pull)
+            }
+        });
+    } catch (e) {
+        console.log(e.stack)
     }
-}
+};
