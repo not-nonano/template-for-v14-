@@ -4,18 +4,18 @@ require('dotenv').config()
 const fs = require('fs');
 
 const commands = [];
-fs.readdirSync("./events/").forEach((dir) => {
+fs.readdirSync("./commands/").forEach((dir) => {
     const commandFiles = fs.readdirSync(`./commands/${dir}`).filter(file => file.endsWith('.js'));
 
     for (const file of commandFiles) {
-        const command = require(`./commands/${file}`);
+        const command = require(`./commands/${dir}/${file}`);
         commands.push(command.data.toJSON());
+        
     } 
 });
 
-
 // Place your client and guild ids here
-const clientId = '966175730096570419';
+const clientId = '753806712586108968';
 const guildId = '575341681596039178';
 
 
