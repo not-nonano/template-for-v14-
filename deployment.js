@@ -15,8 +15,8 @@ fs.readdirSync("./commands/").forEach((dir) => {
 });
 
 // Place your client and guild ids here
-const clientId = '753806712586108968';
-const guildId = '575341681596039178';
+const clientId = '';
+const guildId = '';
 
 
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
